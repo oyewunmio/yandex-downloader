@@ -10,6 +10,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import os
 from time import sleep
+import urllib.request
+
 
 pathname = input('Enter the name of the folder to store the downloaded images to\t')
 
@@ -42,27 +44,17 @@ def download_yandex_image(url):
         timeout = 10
 
         try:
-            element_present = EC.presence_of_element_located(By.XPATH, "/html/body/div[11]/div[1]/div/div/div[3]/div/div[3]/div/div/div[3]/div[1]/a")
-            WebDriverWait(driver, timeout).until(element_present)
+            WebDriverWait(driver, timeout).until(EC.visibility_of_element_located((By.XPATH, '/html/body/div[11]/div[1]/div/div/div[3]/div/div[3]/div/div/div[3]/div[1]/a/span[2]')))
 
-            download_button = driver.find_element(By.XPATH, "/html/body/div[11]/div[1]/div/div/div[3]/div/div[3]/div/div/div[3]/div[1]/a")
-            download_button.send_keys(Keys.ENTER)
-        except TimeoutException:
-            print("Timed out waiting for page to load..check your network connectivty")
-        
-        wait = True
-    while(wait == True):
-        for fname in os.listdir(os.path.join(os.getcwd(), pathname)):
-            if ('Unconfirmed') in fname:
-                print('downloading files ...')
-                sleep(10)
-            else:
-                wait=False
-        
-    print('finished downloading file ...')
-
+            img_src = driver.find_element(By.XPATH, "/html/body/div[11]/div[1]/div/div/div[3]/div/div[2]/div[1]/div[3]/div/img").get_attribute('src')
+            urllib.request.urlretrieve(img_src, f"{str(img_src).split('=')[1]}.jpg")
+        except Exception:
+            print("Error ...")
+    
+    print('image downloaded')
     print('Closing script')
     driver.close()
 
-direct_link = input('Enter the direct link of the yandex image')
+# direct_link = input('Enter the direct link of the yandex image')
+direct_link = "https://yandex.ru/images/search?text=Surrealism&rlt_url=https%3A%2F%2Fink-project.ru%2Fsites%2F1-ink-project%2Fphotoalbums%2F8303.jpg&ogl_url=https%3A%2F%2Fpbs.twimg.com%2Fmedia%2FDgceTL3WAAA_UTZ.jpg&pos=3&img_url=https%3A%2F%2Fpbs.twimg.com%2Fmedia%2FDgceTL3WAAA_UTZ.jpg&rpt=simage"
 download_yandex_image(direct_link)
