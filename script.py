@@ -55,6 +55,6 @@ def download_yandex_image(url):
     print('Closing script')
     driver.close()
 
-# direct_link = input('Enter the direct link of the yandex image')
-direct_link = "https://yandex.ru/images/search?text=Surrealism&rlt_url=https%3A%2F%2Fink-project.ru%2Fsites%2F1-ink-project%2Fphotoalbums%2F8303.jpg&ogl_url=https%3A%2F%2Fpbs.twimg.com%2Fmedia%2FDgceTL3WAAA_UTZ.jpg&pos=3&img_url=https%3A%2F%2Fpbs.twimg.com%2Fmedia%2FDgceTL3WAAA_UTZ.jpg&rpt=simage"
+direct_link = input('Enter the direct link of the yandex image')
+# direct_link = "https://yandex.ru/images/search?text=Surrealism&rlt_url=https%3A%2F%2Fink-project.ru%2Fsites%2F1-ink-project%2Fphotoalbums%2F8303.jpg&ogl_url=https%3A%2F%2Fpbs.twimg.com%2Fmedia%2FDgceTL3WAAA_UTZ.jpg&pos=3&img_url=https%3A%2F%2Fpbs.twimg.com%2Fmedia%2FDgceTL3WAAA_UTZ.jpg&rpt=simage"
 download_yandex_image(direct_link)
